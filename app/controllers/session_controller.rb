@@ -5,8 +5,8 @@ class SessionController < ApplicationController
   def create
     user = User.where(:email => params[:email]).first
     if user.present? && user.authenticate(params[:password])
-      session[:user_id] = user.user_id
-      redirect_to(login_path) #need to change to ajax
+      Notifications.login_message(user).deliver
+      session[:user_id] = user.id
     else
       flash[:notice] = "nope"
       redirect_to(login_path)

@@ -16,11 +16,22 @@
 #
 
 class Product < ActiveRecord::Base
-  attr_accessible :name, :description, :image, :cost, :latitude, :longitude, :address, :user_id
+  attr_accessible :name, :description, :image, :cost, :latitude, :longitude, :address, :user_id, :tags
 
   belongs_to  :user
   has_and_belongs_to_many :tags
+  mount_uploader :image, PicUploader
 
-  #before save geocoder shiznit
+  before_save :geocoder
+
+  private
+  def geocoder
+    result = Geocoder.search(self.address).first
+
+    if result.present?
+      self.latitude = result.latitude
+      self.longitude = result.longitude
+    end
+  end
 
 end

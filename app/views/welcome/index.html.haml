@@ -2,3 +2,31 @@
   .span4
     %h1 Wassup
   .span8
+
+.row
+  .span12
+    - if @auth.present? && @auth.is_admin
+      %p logged in as an admin
+      #product_button
+        = link_to('New Product', new_product_path, :class => 'btn-large btn-success', :remote => true)
+
+#search_holder
+  - if @auth.present?
+    %br
+    .row
+      .span12
+        = text_field_tag :search, nil, :autofocus => true
+
+
+.row
+  .span8
+    #product_form
+  .span5
+
+.row
+  .span12
+    #products_table
+      = render(:partial => 'products/products')
+.row
+  .span12
+    #map_canvas

@@ -8,6 +8,9 @@ gem 'carrierwave' #this moves files form browser to server
 gem 'fog' # this moves files from server to AWS
 gem 'rmagick' # image manipulation
 gem 'remotipart' #allows you to upload files through ajax
+gem 'geocoder'
+gem 'gmaps4rails'
+gem 'aws-ses'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'

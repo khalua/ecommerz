@@ -26,11 +26,14 @@
               </li>
             </ul>
               <% if @auth.blank? %>
-                <form class="navbar-form pull-right">
-                <input class="span2" type="text" placeholder="Email">
-                <input class="span2" type="password" placeholder="Password">
-                <button type="submit" class="btn" action="/login" method="post">Sign in</button>
-            </form>
+
+                <%= render(:partial => 'session/new')  %>
+              <% else %>
+              <ul class="nav">
+                <li><a href="#"><%= number_to_currency @auth.balance %></a></li>
+               <li class="divider"></li>
+                <li><%= link_to("Logout", login_path, :method => :delete ) %></li>
+              </ul>
               <% end %>
           </div><!--/.nav-collapse -->
         </div>

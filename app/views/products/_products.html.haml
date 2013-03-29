@@ -1,0 +1,20 @@
+- if @auth.present?
+  %h3 Our fucking awesome products
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Name
+        %th Description
+        %th Image
+        %th Cost
+        %th Tags
+    %tbody
+      - @products.each do |product|
+        %tr
+          %td= product.name
+          %td= product.description
+          %td image_tag(product.image.thumb.url)
+          %td= number_to_currency(product.cost)
+          %td
+            - product.tags.each do |tag|
+              =link_to("#{tag.name} - #{tag.products.count}", filter_products_path(tag.id), :remote => true)
